@@ -11,7 +11,7 @@ namespace NanoMediatorConsoleSample
                 .AddNanoMediator(typeof(Program).Assembly)
                 .BuildServiceProvider();
 
-            var mediator = serviceProvider.GetRequiredService<NanoMediator>();
+            var mediator = serviceProvider.GetRequiredService<INanoMediator>();
 
             var timeResult = await mediator.Send(new CurrentTimeQuery());
             Console.WriteLine($"[Query Result] {timeResult}");

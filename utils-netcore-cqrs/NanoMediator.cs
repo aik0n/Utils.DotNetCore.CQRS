@@ -4,7 +4,7 @@ using System.Threading.Tasks;
 
 namespace utils_netcore_cqrs
 {
-    public class NanoMediator
+    public class NanoMediator : INanoMediator
     {
         private readonly IServiceProvider _serviceProvider;
 

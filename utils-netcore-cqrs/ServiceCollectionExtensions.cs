@@ -8,7 +8,7 @@ namespace utils_netcore_cqrs
     {
         public static IServiceCollection AddNanoMediator(this IServiceCollection services, Assembly assembly)
         {
-            services.AddScoped<NanoMediator>();
+            services.AddScoped<INanoMediator, NanoMediator>();
 
             var handlerInterfaceType = typeof(IDataRequestHandler<,>);
 

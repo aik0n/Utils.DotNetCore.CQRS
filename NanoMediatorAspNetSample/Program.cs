@@ -11,7 +11,6 @@ builder.Services.AddDbContext<ApplicationContext>(options => options.UseInMemory
 builder.Services.AddNanoMediator(typeof(Program).Assembly);
 builder.Services.AddEndpointsApiExplorer();
 
-builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen(options =>
 {
     options.SwaggerDoc("v1", new OpenApiInfo
@@ -55,7 +54,7 @@ if (app.Environment.IsDevelopment())
     });
 }
 
-app.MapGet("/products", async (NanoMediator mediator) =>
+app.MapGet("/products", async (INanoMediator mediator) =>
 {
     var products = await mediator.Send(new AllProductsQuery());
     return Results.Ok(products);
@@ -63,7 +62,7 @@ app.MapGet("/products", async (NanoMediator mediator) =>
 .WithName("GetAllProducts")
 .WithOpenApi(); ;
 
-app.MapPost("/products", async (NanoMediator mediator, CreateProductCommand command) =>
+app.MapPost("/products", async (INanoMediator mediator, CreateProductCommand command) =>
 {
     var product = await mediator.Send(command);
     return Results.Created($"/products/{product.Id}", product);

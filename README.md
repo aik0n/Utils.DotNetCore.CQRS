@@ -11,7 +11,7 @@ The `NanoMediator` is a lightweight CQRS (Command Query Responsibility Segregati
 In your `Startup.cs` or `Program.cs` for minimal hosting (ASP.NET Core or Console App), register the NanoMediator with:
 
 ```csharp
-services.AddNanoMediator(typeof(SomeHandlerInYourAssembly));
+services.AddNanoMediator(typeof(Program).Assembly);
 ```
 
 You can pass any type from the assembly that contains your handlers. The method will scan and register all handlers implementing `IDataRequestHandler<,>`.
@@ -20,23 +20,23 @@ You can pass any type from the assembly that contains your handlers. The method 
 
 ## 🧩 Core Interfaces
 
-### `IDataRequest<TResponse>`
+### `IDataRequest<TDataResponse>`
 
-Represents a request that returns a response of type `TResponse`.
+Represents a request that returns a response of type `TDataResponse`.
 
 ```csharp
-public interface IDataRequest<TResponse> { }
+public interface IDataRequest<TDataResponse> { }
 ```
 
-### `IDataRequestHandler<TRequest, TResponse>`
+### `IDataRequestHandler<TDataRequest, TDataResponse>`
 
 Handler interface for processing `IDataRequest`.
 
 ```csharp
-public interface IDataRequestHandler<TRequest, TResponse>
-    where TRequest : IDataRequest<TResponse>
+public interface IDataRequestHandler<TDataRequest, TDataResponse>
+    where TDataRequest : IDataRequest<TDataResponse>
 {
-    Task<TResponse> HandleAsync(TRequest request, CancellationToken cancellationToken = default);
+    Task<TDataResponse> HandleAsync(TDataRequest request, CancellationToken cancellationToken = default);
 }
 ```
 
@@ -51,9 +51,9 @@ Use constructor injection to access `NanoMediator`:
 ```csharp
 public class SomeService
 {
-    private readonly NanoMediator _mediator;
+    private readonly INanoMediator _mediator;
 
-    public SomeService(NanoMediator mediator)
+    public SomeService(INanoMediator mediator)
     {
         _mediator = mediator;
     }
@@ -90,7 +90,7 @@ public class CurrentTimeQueryHandler : IDataRequestHandler<CurrentTimeQuery, str
 ### Send the Query
 
 ```csharp
-var currentTime = await mediator.SendAsync(new CurrentTimeQuery());
+var currentTime = await _mediator.SendAsync(new CurrentTimeQuery());
 Console.WriteLine(currentTime);
 ```
 
@@ -115,7 +115,8 @@ This repository includes:
 
 ## 📁 Source Files
 
-- `NanoMediator.cs`: Mediator implementation
+- `NanoMediator.cs`: Nano Mediator implementation
+- `INanoMediator.cs` : Nano Mediator interface
 - `IDataRequest.cs`: Request interface
 - `IDataRequestHandler.cs`: Handler interface
 - `ServiceCollectionExtensions.cs`: Dependency injection extensions

@@ -6,7 +6,7 @@
     <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
     <PackageId>Utils.DotNetCore.CQRS</PackageId>
     <Title>Utils.DotNetCore.CQRS</Title>
-    <Version>1.0.1</Version>
+    <Version>1.0.2</Version>
     <Authors>a_i_k_0_n</Authors>
     <Description>A Simple and Lightweight implementation of CQRS</Description>
     <PackageIcon>robo_avatar_aik0n_02_128_128.png</PackageIcon>
@@ -14,7 +14,7 @@
     <RepositoryUrl>https://github.com/aik0n/Utils.DotNetCore.CQRS</RepositoryUrl>
     <RepositoryType>git</RepositoryType>
     <PackageTags>CQRS;Console;WEB</PackageTags>
-    <PackageReleaseNotes>Initial release</PackageReleaseNotes>
+    <PackageReleaseNotes>Documentation update, code brushed</PackageReleaseNotes>
     <NeutralLanguage>en-US</NeutralLanguage>
     <PackageLicenseFile>LICENSE.md</PackageLicenseFile>
     <IncludeSymbols>True</IncludeSymbols>
