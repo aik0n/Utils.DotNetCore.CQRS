@@ -6,7 +6,12 @@ The `NanoMediator` is a lightweight CQRS (Command Query Responsibility Segregati
 
 ## 🔧 Setup
 
-### 1. Register the Mediator
+### 1. Register the Mediator  
+
+It is possible to use a NuGet package, as example:  
+```
+dotnet add package Utils.DotNetCore.CQRS --version 1.0.2
+```
 
 In your `Startup.cs` or `Program.cs` for minimal hosting (ASP.NET Core or Console App), register the NanoMediator with:
 
