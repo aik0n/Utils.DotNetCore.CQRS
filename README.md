@@ -1,3 +1,8 @@
+[![License: MIT](https://img.shields.io/badge/license-MIT-FFD700.svg?style=flat)](https://opensource.org/licenses/MIT)
+![Tag](https://img.shields.io/github/v/tag/aik0n/Utils.DotNetCore.CQRS?label=version&style=flat&color=090&sort=semver)
+![Repo Size](https://img.shields.io/github/repo-size/aik0n/Utils.DotNetCore.CQRS?style=flat&color=036)
+![Stars](https://img.shields.io/github/stars/aik0n/Utils.DotNetCore.CQRS?style=flat&color=DAA520)
+
 # NanoMediator Library Documentation
 
 The `NanoMediator` is a lightweight CQRS (Command Query Responsibility Segregation) pattern implementation for .NET, providing a minimal mediator without third-party dependencies.
@@ -13,7 +18,7 @@ It is possible to use a NuGet package, as example:
 dotnet add package Utils.DotNetCore.CQRS --version 1.0.3
 ```
 
-> **Breaking change in v1.0.2:** The root namespace was renamed from `utils_netcore_cqrs` to `Utils.DotNetCore.CQRS`. If you are upgrading from v1.0.2 or earlier, update all `using utils_netcore_cqrs;` directives to `using Utils.DotNetCore.CQRS;`.
+> **Breaking change in v1.0.3:** The root namespace was renamed from `utils_netcore_cqrs` to `Utils.DotNetCore.CQRS`. If you are upgrading from v1.0.2 or earlier, update all `using utils_netcore_cqrs;` directives to `using Utils.DotNetCore.CQRS;`.
 
 In your `Startup.cs` or `Program.cs` for minimal hosting (ASP.NET Core or Console App), register the NanoMediator with:
 
@@ -132,4 +137,4 @@ This repository includes:
 
 ## 📝 License
 
-MIT or similar (check repository for actual license)
+This project is licensed under the [MIT License](./LICENSE)
