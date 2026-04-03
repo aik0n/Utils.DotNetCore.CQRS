@@ -1,6 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using NanoMediatorAspNetSample.Database;
-using utils_netcore_cqrs;
+using Utils.DotNetCore.CQRS;
 
 namespace NanoMediatorAspNetSample.Implementation
 {

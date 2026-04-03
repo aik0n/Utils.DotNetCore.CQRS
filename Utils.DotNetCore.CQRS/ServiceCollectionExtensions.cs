@@ -2,7 +2,7 @@
 using System.Linq;
 using System.Reflection;
 
-namespace utils_netcore_cqrs
+namespace Utils.DotNetCore.CQRS
 {
     public static class ServiceCollectionExtensions
     {

@@ -2,7 +2,7 @@
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
-    <RootNamespace>utils_netcore_cqrs</RootNamespace>
+    <RootNamespace>Utils.DotNetCore.CQRS</RootNamespace>
     <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
     <PackageId>Utils.DotNetCore.CQRS</PackageId>
     <Title>Utils.DotNetCore.CQRS</Title>

@@ -2,7 +2,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi.Models;
 using NanoMediatorAspNetSample.Database;
 using NanoMediatorAspNetSample.Implementation;
-using utils_netcore_cqrs;
+using Utils.DotNetCore.CQRS;
 
 var builder = WebApplication.CreateBuilder(args);
 
