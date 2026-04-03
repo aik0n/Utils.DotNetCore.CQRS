@@ -55,12 +55,12 @@ public class NanoMediatorTests
     [Fact]
     public async Task Send_WithRequest_PassesExactRequestInstanceToHandler()
     {
-        var expectedRequest = new SampleRequest();
+        var expectedRequest = new CapturingRequest();
 
         var capturingHandler = new RequestCapturingHandler();
         var serviceProvider = Substitute.For<IServiceProvider>();
         serviceProvider
-            .GetService(typeof(IDataRequestHandler<SampleRequest, string>))
+            .GetService(typeof(IDataRequestHandler<CapturingRequest, string>))
             .Returns(capturingHandler);
 
         var mediator = new NanoMediator(serviceProvider);
@@ -82,5 +82,33 @@ public class NanoMediatorTests
 
         await act.Should().ThrowExactlyAsync<InvalidOperationException>()
             .WithMessage($"*{nameof(SampleRequest)}*");
+    }
+
+    [Fact]
+    public async Task Send_NullRequest_ThrowsArgumentNullException()
+    {
+        var serviceProvider = Substitute.For<IServiceProvider>();
+        var mediator = new NanoMediator(serviceProvider);
+
+        var act = () => mediator.Send<string>(null!);
+
+        await act.Should().ThrowExactlyAsync<ArgumentNullException>()
+            .WithParameterName("request");
+    }
+
+    [Fact]
+    public async Task Send_WithDefaultCancellationToken_PassesDefaultTokenToHandler()
+    {
+        var capturingHandler = new CancellationCapturingHandler();
+        var serviceProvider = Substitute.For<IServiceProvider>();
+        serviceProvider
+            .GetService(typeof(IDataRequestHandler<AnotherRequest, int>))
+            .Returns(capturingHandler);
+
+        var mediator = new NanoMediator(serviceProvider);
+
+        await mediator.Send(new AnotherRequest());
+
+        capturingHandler.CapturedToken.Should().Be(CancellationToken.None);
     }
 }

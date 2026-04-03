@@ -143,4 +143,35 @@ public class ServiceCollectionExtensionsTests
             d.ServiceType.IsGenericType &&
             d.ServiceType.GetGenericTypeDefinition() == typeof(IDataRequestHandler<,>));
     }
+
+    [Fact]
+    public void AddNanoMediator_NullAssembly_ThrowsArgumentNullException()
+    {
+        var services = new ServiceCollection();
+
+        var act = () => services.AddNanoMediator(null!);
+
+        act.Should().ThrowExactly<ArgumentNullException>()
+            .WithParameterName("assembly");
+    }
+
+    [Fact]
+    public void AddNanoMediator_NullServices_ThrowsArgumentNullException()
+    {
+        var act = () => ((IServiceCollection)null!).AddNanoMediator(TestAssembly);
+
+        act.Should().ThrowExactly<ArgumentNullException>()
+            .WithParameterName("services");
+    }
+
+    [Fact]
+    public void AddNanoMediator_CalledTwice_RegistersNanoMediatorOnce()
+    {
+        var services = new ServiceCollection();
+
+        services.AddNanoMediator(TestAssembly);
+        services.AddNanoMediator(TestAssembly);
+
+        services.Count(d => d.ServiceType == typeof(INanoMediator)).Should().Be(1);
+    }
 }

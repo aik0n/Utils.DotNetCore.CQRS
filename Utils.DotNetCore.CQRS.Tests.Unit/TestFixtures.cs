@@ -6,6 +6,7 @@ public sealed class SampleRequest : IDataRequest<string> { }
 public sealed class AnotherRequest : IDataRequest<int> { }
 public sealed class MultiRequest : IDataRequest<bool> { }
 public sealed class MultiRequestAlt : IDataRequest<double> { }
+public sealed class CapturingRequest : IDataRequest<string> { }
 
 public sealed class SampleRequestHandler : IDataRequestHandler<SampleRequest, string>
 {
@@ -24,11 +25,11 @@ public sealed class CancellationCapturingHandler : IDataRequestHandler<AnotherRe
     }
 }
 
-public sealed class RequestCapturingHandler : IDataRequestHandler<SampleRequest, string>
+public sealed class RequestCapturingHandler : IDataRequestHandler<CapturingRequest, string>
 {
     public IDataRequest<string>? CapturedRequest { get; private set; }
 
-    public Task<string> Handle(SampleRequest request, CancellationToken cancellationToken)
+    public Task<string> Handle(CapturingRequest request, CancellationToken cancellationToken)
     {
         CapturedRequest = request;
         return Task.FromResult("captured");

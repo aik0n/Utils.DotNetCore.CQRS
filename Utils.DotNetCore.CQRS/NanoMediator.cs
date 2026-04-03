@@ -15,6 +15,11 @@ namespace Utils.DotNetCore.CQRS
 
         public async Task<TDataResponse> Send<TDataResponse>(IDataRequest<TDataResponse> request, CancellationToken cancellationToken = default)
         {
+            if (request is null)
+            {
+                throw new ArgumentNullException(nameof(request));
+            }
+
             var handlerType = typeof(IDataRequestHandler<,>).MakeGenericType(request.GetType(), typeof(TDataResponse));
 
             var handler = _serviceProvider.GetService(handlerType) ?? throw new InvalidOperationException($"Handler for '{request.GetType().Name}' not found.");

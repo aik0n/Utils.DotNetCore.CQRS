@@ -1,4 +1,6 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.DependencyInjection.Extensions;
+using System;
 using System.Linq;
 using System.Reflection;
 
@@ -8,7 +10,17 @@ namespace Utils.DotNetCore.CQRS
     {
         public static IServiceCollection AddNanoMediator(this IServiceCollection services, Assembly assembly)
         {
-            services.AddScoped<INanoMediator, NanoMediator>();
+            if (services is null)
+            {
+                throw new ArgumentNullException(nameof(services));
+            }
+
+            if (assembly is null)
+            {
+                throw new ArgumentNullException(nameof(assembly));
+            }
+
+            services.TryAddScoped<INanoMediator, NanoMediator>();
 
             var handlerInterfaceType = typeof(IDataRequestHandler<,>);
 
@@ -26,7 +38,7 @@ namespace Utils.DotNetCore.CQRS
             {
                 foreach (var handlerInterface in handler.Interfaces)
                 {
-                    services.AddScoped(handlerInterface, handler.Type);
+                    services.TryAddScoped(handlerInterface, handler.Type);
                 }
             }
 
