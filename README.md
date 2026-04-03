@@ -10,8 +10,10 @@ The `NanoMediator` is a lightweight CQRS (Command Query Responsibility Segregati
 
 It is possible to use a NuGet package, as example:  
 ```
-dotnet add package Utils.DotNetCore.CQRS --version 1.0.2
+dotnet add package Utils.DotNetCore.CQRS --version 1.0.3
 ```
+
+> **Breaking change in v1.0.2:** The root namespace was renamed from `utils_netcore_cqrs` to `Utils.DotNetCore.CQRS`. If you are upgrading from v1.0.2 or earlier, update all `using utils_netcore_cqrs;` directives to `using Utils.DotNetCore.CQRS;`.
 
 In your `Startup.cs` or `Program.cs` for minimal hosting (ASP.NET Core or Console App), register the NanoMediator with:
 
@@ -41,7 +43,7 @@ Handler interface for processing `IDataRequest`.
 public interface IDataRequestHandler<TDataRequest, TDataResponse>
     where TDataRequest : IDataRequest<TDataResponse>
 {
-    Task<TDataResponse> HandleAsync(TDataRequest request, CancellationToken cancellationToken = default);
+    Task<TDataResponse> Handle(TDataRequest request, CancellationToken cancellationToken = default);
 }
 ```
 
@@ -65,7 +67,7 @@ public class SomeService
 
     public async Task DoWorkAsync()
     {
-        var result = await _mediator.SendAsync(new SomeQuery());
+        var result = await _mediator.Send(new SomeQuery());
     }
 }
 ```
@@ -85,7 +87,7 @@ public class CurrentTimeQuery : IDataRequest<string> { }
 ```csharp
 public class CurrentTimeQueryHandler : IDataRequestHandler<CurrentTimeQuery, string>
 {
-    public Task<string> HandleAsync(CurrentTimeQuery request, CancellationToken cancellationToken = default)
+    public Task<string> Handle(CurrentTimeQuery request, CancellationToken cancellationToken = default)
     {
         return Task.FromResult(DateTime.Now.ToString("T"));
     }
@@ -95,7 +97,7 @@ public class CurrentTimeQueryHandler : IDataRequestHandler<CurrentTimeQuery, str
 ### Send the Query
 
 ```csharp
-var currentTime = await _mediator.SendAsync(new CurrentTimeQuery());
+var currentTime = await _mediator.Send(new CurrentTimeQuery());
 Console.WriteLine(currentTime);
 ```
 
