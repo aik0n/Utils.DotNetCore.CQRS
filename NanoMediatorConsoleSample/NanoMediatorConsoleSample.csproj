@@ -12,7 +12,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\utils-netcore-cqrs\utils-netcore-cqrs.csproj" />
+    <ProjectReference Include="..\Utils.DotNetCore.CQRS\Utils.DotNetCore.CQRS.csproj" />
   </ItemGroup>
 
 </Project>
