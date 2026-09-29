@@ -1,20 +1,20 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>netstandard2.0</TargetFramework>
+    <TargetFrameworks>net8.0;net10.0</TargetFrameworks>
     <RootNamespace>Utils.DotNetCore.CQRS</RootNamespace>
     <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
     <PackageId>Utils.DotNetCore.CQRS</PackageId>
     <Title>Utils.DotNetCore.CQRS</Title>
-    <Version>1.0.3</Version>
+    <Version>1.1.0</Version>
     <Authors>a_i_k_0_n</Authors>
     <Description>A Simple and Lightweight implementation of CQRS</Description>
-    <PackageIcon>robo_avatar_aik0n_02_128_128.png</PackageIcon>
+    <PackageIcon>robo_avatar_02_128_128.png</PackageIcon>
     <PackageReadmeFile>README.md</PackageReadmeFile>
     <RepositoryUrl>https://github.com/aik0n/Utils.DotNetCore.CQRS</RepositoryUrl>
     <RepositoryType>git</RepositoryType>
     <PackageTags>CQRS;Console;WEB</PackageTags>
-    <PackageReleaseNotes>Documentation corrected: Handle and Send method names aligned with actual implementation</PackageReleaseNotes>
+    <PackageReleaseNotes>Targets net8.0 and net10.0; netstandard2.0 dropped. Microsoft.Extensions.DependencyInjection.Abstractions 8.0.x / 10.0.x per target.</PackageReleaseNotes>
     <NeutralLanguage>en-US</NeutralLanguage>
     <PackageLicenseFile>LICENSE.md</PackageLicenseFile>
     <IncludeSymbols>True</IncludeSymbols>
@@ -22,7 +22,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <None Include="..\..\_shared\robo_avatar_aik0n_02_128_128.png">
+    <None Include="..\..\_shared\robo_avatar_02_128_128.png">
       <Pack>True</Pack>
       <PackagePath>\</PackagePath>
     </None>
@@ -36,9 +36,12 @@
     </None>
   </ItemGroup>
 
-  <ItemGroup>
-    <PackageReference Include="Microsoft.CSharp" Version="4.7.0" />
-    <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="9.0.3" />
+  <ItemGroup Condition="'$(TargetFramework)' == 'net8.0'">
+    <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="8.0.2" />
+  </ItemGroup>
+
+  <ItemGroup Condition="'$(TargetFramework)' == 'net10.0'">
+    <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="10.0.12" />
   </ItemGroup>
 
 </Project>

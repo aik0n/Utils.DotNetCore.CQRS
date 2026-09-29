@@ -15,8 +15,10 @@ The `NanoMediator` is a lightweight CQRS (Command Query Responsibility Segregati
 
 It is possible to use a NuGet package, as example:  
 ```
-dotnet add package Utils.DotNetCore.CQRS --version 1.0.3
+dotnet add package Utils.DotNetCore.CQRS --version 1.1.0
 ```
+
+> **v1.1.0:** The package targets `net8.0` and `net10.0`; `netstandard2.0` is no longer supported. Projects that still need `netstandard2.0` should stay on v1.0.3.
 
 > **Breaking change in v1.0.3:** The root namespace was renamed from `utils_netcore_cqrs` to `Utils.DotNetCore.CQRS`. If you are upgrading from v1.0.2 or earlier, update all `using utils_netcore_cqrs;` directives to `using Utils.DotNetCore.CQRS;`.
 
